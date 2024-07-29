@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'title' %}services-detail{% endblock 'title' %}
+{% block 'content' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('{% static 'assets/img/page-header.jpg' %}');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Service Details</h2>
+              <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Service Details</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Service Details Section ======= -->
+    <section id="service-details" class="service-details">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="services-list">
+                {% for obj in detail.category.all %}
+              <a href="#">{{obj.title}}</a>
+              {% endfor %}
+
+            </div>
+
+            <h4>{{detail.name}}</h4>
+            <p>{{detail.content}}</p>
+          </div>
+
+          <div class="col-lg-8">
+            <img src={{detail.image.url}} alt="" class="img-fluid services-img">
+            <h3>{{detail.title}}</h3>
+            <p>
+              {{detail.description}}
+            </p>
+            <ul>
+              {% for obj in detail.generals.all %}
+              <li><i class="bi bi-check-circle"></i> <span>{{obj.title}}</span></li>
+              {% endfor %}
+            </ul>
+            <p>
+              {{detail.price}}
+            </p>
+            <p>
+              {{detail.counted_view}}
+            </p>
+          </div>
+
+        </div>
+        {% for comment in comments %}
+           <p><a href={% url "services:edit_comment"  id=comment.id %}>{{comment.message}}</p>
+        {% endfor %}
+
+      </div>
+    </section><!-- End Service Details Section -->
+
+  </main><!-- End #main -->
+
+  <a href={% url 'services:adv1' %}>advertise</a>
+
+  <!-- ======= Footer ======= -->
+  {% endblock 'content' %}
